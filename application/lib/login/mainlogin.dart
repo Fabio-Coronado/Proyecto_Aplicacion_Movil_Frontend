@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:application/main.dart';
 import 'login.dart';
+import 'register.dart';
 
 class MainLoginWidgetState extends State<AppWidget>{
   @override 
@@ -49,7 +50,9 @@ class MainLoginWidgetState extends State<AppWidget>{
                           borderRadius: new BorderRadius.circular(20),
                         ),
                         child: OutlineButton(
-                          onPressed: () => debugPrint("OutlinedButton presionado"),
+                          onPressed: () => {
+                            navigateToRegister(context)
+                          }, 
                           child: Text("Registrarse"),
                         ),
                       ),
@@ -114,7 +117,7 @@ class MainLoginWidgetState extends State<AppWidget>{
                         ),
                         child: OutlineButton(
                           onPressed: () => {
-                            navigateToSubPage(context)
+                            navigateToLogin(context)
                           },                      
                           child: Row(
                             children:[
@@ -137,7 +140,11 @@ class MainLoginWidgetState extends State<AppWidget>{
     );
   }
 
-  Future navigateToSubPage(context) async {
+  Future navigateToLogin(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => LoginWidgetState()));
+  }
+
+  Future navigateToRegister(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterWidgetState()));
   }
 }
