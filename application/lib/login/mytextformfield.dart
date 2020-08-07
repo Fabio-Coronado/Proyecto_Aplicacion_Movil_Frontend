@@ -41,14 +41,28 @@ class MyTextFormField extends StatelessWidget {
         padding: EdgeInsets.all(5.0),
         child: Container(
             width: 300,
-            child: TextFormField(
-              //cursorColor: Colors.green,
-              decoration: InputDecoration(               
+            child: TextFormField(              
+              decoration: InputDecoration(    
+                hintText: hintText,
+                hintStyle: TextStyle(
+                  color: Colors.grey, 
+                  fontSize: 12,
+                ),
                 enabledBorder: UnderlineInputBorder(      
-                  borderSide: BorderSide(color: Colors.green),   
+                  borderSide: BorderSide(
+                    width: 3,
+                    color: Colors.grey),   
                 ),
                 focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.green),
+                      borderSide: BorderSide(
+                        width: 3,
+                        color: Colors.green),
+                ),
+                errorBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 3,
+                    color: Colors.red
+                    )
                 ),  
                 //hintText: hintText,
                 contentPadding: EdgeInsets.all(5.0),

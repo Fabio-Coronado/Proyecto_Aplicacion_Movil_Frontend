@@ -5,11 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:validators/validators.dart' as validator;
 import "mytextformfield.dart";
 
-class RegisterWidgetState extends StatelessWidget{
+class RegisterWidget extends StatelessWidget{
 
 @override 
   Widget build(BuildContext context){
-     return Container(
+    return Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/fondo_login.jpg"),
@@ -29,30 +29,33 @@ class RegisterWidgetState extends StatelessWidget{
           ),
           backgroundColor: Colors.transparent,
           body: SafeArea(
-            child:SingleChildScrollView(
-              child: Column(
-                children: <Widget>[                 
-                    Container(
-                      height: 100,
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Registrar",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.mcLaren(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                      ),
+            child:Column(
+              children: <Widget>[                 
+                  Container(
+                    height: 100,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Registrar",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.mcLaren(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
                     ),
-                    RegisterForm(),   
-                ],
-              ),          
-         
-            ),
+                  ),
+                  Expanded(
+                    child: ListView(
+                      children: <Widget>[
+                        RegisterForm()                    
+                      ],
+                    ),
+                  ),
+              ]
+            )
           )
-    )
-  );
+        )
+    );
   }
 }
 
@@ -100,86 +103,86 @@ class _RegisterFormState extends State<RegisterForm> {
   return Form(
         key: _formKey,
           child: Column(
-          children: <Widget>[
-                  MyTextFormField(
-                    hintText: 'Usuario',
-                    isPassword: false,
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Ingresa el usuario';
-                      }
-                      return null;
-                    },
-                    onSaved: (String value) {
-                      model.username = value;
-                    },
-                  ),
-                  MyTextFormField(
-                    hintText: 'Correo',
-                    isEmail: true,
-                    validator: (String value) {
-                      if (!validator.isEmail(value)) {
-                        return 'Por favor ingresa un correo válido';
-                      }
-                      return null;
-                    },
-                    onSaved: (String value) {
-                      model.email = value;
-                    },
-                  ),
-                  MyTextFormField(
-                    hintText: 'Contraseña',
-                    isPassword: true,
-                    validator: (String value) {
-                      if (value.length < 7) {
-                        return 'La contraseña debe tener más de 7 caracteres';
-                      }
-                      _formKey.currentState.save();
-                      return null;
-                    },
-                    onSaved: (String value) {
-                      model.password = value;
-                    },
-                  ),
-                  MyTextFormField(
-                    hintText: 'Confirmar contraseña',
-                    isPassword: true,
-                    validator: (String value) {
-                      if (value.length < 7) {
-                        return 'La contraseña debe tener más de 7 caracteres';
-                      } else if (model.password != null && value != model.password){
-                        print(value);
-                        print(model.password);
-                        return "Las contraseñas no coinciden";
-                      }
-                      return null;
-                    },
-                    onSaved: (String value) {
-                      //model.password = value;
-                    },
-                  ),
-                
-                  RaisedButton(
-                    color: Colors.green,
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save();
-                       /* Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Result(model: this.model),
-                                )
-                        );*/
-                      }
-                    },
-                    child: Text(
-                      'Ir',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
+            children: <Widget>[
+                    MyTextFormField(
+          hintText: 'Usuario',
+          isPassword: false,
+          validator: (String value) {
+            if (value.isEmpty) {
+              return 'Ingresa el usuario';
+            }
+            return null;
+          },
+          onSaved: (String value) {
+            model.username = value;
+          },
                     ),
-                  )
-          ],
+                    MyTextFormField(
+          hintText: 'Correo',
+          isEmail: true,
+          validator: (String value) {
+            if (!validator.isEmail(value)) {
+              return 'Por favor ingresa un correo válido';
+            }
+            return null;
+          },
+          onSaved: (String value) {
+            model.email = value;
+          },
+                    ),
+                    MyTextFormField(
+          hintText: 'Contraseña',
+          isPassword: true,
+          validator: (String value) {
+            if (value.length < 7) {
+              return 'La contraseña debe tener más de 7 caracteres';
+            }
+            _formKey.currentState.save();
+            return null;
+          },
+          onSaved: (String value) {
+            model.password = value;
+          },
+                    ),
+                    MyTextFormField(
+          hintText: 'Confirmar contraseña',
+          isPassword: true,
+          validator: (String value) {
+            if (value.length < 7) {
+              return 'La contraseña debe tener más de 7 caracteres';
+            } else if (model.password != null && value != model.password){
+              print(value);
+              print(model.password);
+              return "Las contraseñas no coinciden";
+            }
+            return null;
+          },
+          onSaved: (String value) {
+            //model.password = value;
+          },
+                    ),
+                  
+                    RaisedButton(
+          color: Colors.green,
+          onPressed: () {
+            if (_formKey.currentState.validate()) {
+              _formKey.currentState.save();
+             /* Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Result(model: this.model),
+                      )
+              );*/
+            }
+          },
+          child: Text(
+            'Ir',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+                    )
+            ],
         ),
   );
       

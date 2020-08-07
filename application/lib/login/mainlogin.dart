@@ -1,9 +1,13 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:application/main.dart';
 import 'login.dart';
 import 'register.dart';
+
+class AppWidget extends StatefulWidget{
+  @override 
+  State<StatefulWidget> createState() => MainLoginWidgetState();
+}
 
 class MainLoginWidgetState extends State<AppWidget>{
   @override 
@@ -141,10 +145,10 @@ class MainLoginWidgetState extends State<AppWidget>{
   }
 
   Future navigateToLogin(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginWidgetState()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginWidget()));
   }
 
   Future navigateToRegister(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterWidgetState()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterWidget()));
   }
 }

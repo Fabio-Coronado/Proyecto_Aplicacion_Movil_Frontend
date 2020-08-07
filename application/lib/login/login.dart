@@ -3,8 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import "mytextformfield.dart";
+import 'package:application/home/home.dart';
 
-class LoginWidgetState extends StatelessWidget{
+
+
+class LoginWidget extends StatelessWidget{
 
 @override 
   Widget build(BuildContext context){
@@ -27,7 +30,7 @@ class LoginWidgetState extends StatelessWidget{
             ),
           ),
           backgroundColor: Colors.transparent,
-          body: SafeArea(
+          body: SafeArea(   
             child:SingleChildScrollView(
               child: Column(
                 children: <Widget>[                 
@@ -90,6 +93,7 @@ class LoginForm extends StatefulWidget {
 
 
 class _LoginFormState extends State<LoginForm> {
+  String _username, _password;
   final _formKey = GlobalKey<FormState>();
   //Model model = Model();
 @override
@@ -109,7 +113,7 @@ class _LoginFormState extends State<LoginForm> {
                       return null;
                     },
                     onSaved: (String value) {
-                      //model.username = value;
+                      _username = value;
                     },
                   ),
                   MyTextFormField(
@@ -122,23 +126,13 @@ class _LoginFormState extends State<LoginForm> {
                       return null;
                     },
                     onSaved: (String value) {
-                      //model.password = value;
+                      _password = value;
                     },
                   ),
                 
                   RaisedButton(
                     color: Colors.green,
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save();
-                       /* Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Result(model: this.model),
-                                )
-                        );*/
-                      }
-                    },
+                    onPressed: SingIn,
                     child: Text(
                       'Ir',
                       style: TextStyle(
@@ -151,4 +145,18 @@ class _LoginFormState extends State<LoginForm> {
   );
       
   }
+  
+
+  Future<void> SingIn() async{
+    final formState = _formKey.currentState;
+    if (formState.validate()){
+      formState.save();
+      //await consult to database
+      Navigator.pushAndRemoveUntil(context,
+                        MaterialPageRoute(builder: (context) => Home(user: _username)), (route) => false);
+    }
+
+
+  }
+ 
 }

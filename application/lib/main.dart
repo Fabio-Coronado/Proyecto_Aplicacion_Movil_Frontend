@@ -1,5 +1,4 @@
 import 'package:google_fonts/google_fonts.dart';
-
 import 'login/mainlogin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +22,7 @@ class MainWidget extends StatelessWidget{
 
 }
 
-class AppWidget extends StatefulWidget{
-  @override 
-  State<StatefulWidget> createState() => MainLoginWidgetState();
-}
+
 
 
 
