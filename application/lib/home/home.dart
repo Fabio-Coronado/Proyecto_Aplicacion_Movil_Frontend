@@ -1,4 +1,7 @@
 import 'package:application/competir/competir.dart';
+import 'package:application/models/user.dart';
+import 'package:application/profile/profile.dart';
+import 'package:application/sugerencia/sugerencia.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +16,7 @@ class Home extends StatefulWidget{
     Key key,
     @required this.user
   }): super(key: key);
-  final String user;
+  final User user;
   @override 
   _HomeState createState() => _HomeState();
 }
@@ -44,7 +47,7 @@ class LateralMenu extends StatelessWidget{
     Key key,
     this.user
   }): super(key: key);
-  final String user;
+  final User user;
   @override 
   Widget build(BuildContext context){
     return Container(
@@ -54,12 +57,12 @@ class LateralMenu extends StatelessWidget{
           padding: EdgeInsets.zero,
           children: <Widget>[
             new UserAccountsDrawerHeader(
-              accountName: Text(user), 
-              accountEmail: Text("${this.user}@correo.pe"),
+              accountName: Text("${user.firstname} ${user.lastname}"), 
+              accountEmail: Text(user.correo),
               currentAccountPicture: new CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.red,
-                //backgroundImage:
+                backgroundImage: AssetImage(user.image),
               ),
               decoration: BoxDecoration(
                 color: Colors.green,
@@ -83,7 +86,10 @@ class LateralMenu extends StatelessWidget{
             ListTile(
               leading: Icon(Icons.verified_user),
               title: Text('Perfil'),
-              onTap: () => {Navigator.of(context).pop()},
+              onTap: () => { Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Profile(user: user)),
+              )},
             ),
             ListTile(
               leading: Icon(Icons.settings),
@@ -93,7 +99,10 @@ class LateralMenu extends StatelessWidget{
             ListTile(
               leading: Icon(Icons.border_color),
               title: Text('Sugerencia'),
-              onTap: () => {Navigator.of(context).pop()},
+              onTap: () => {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>Sugerencia(user: user)),
+              )},
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app),

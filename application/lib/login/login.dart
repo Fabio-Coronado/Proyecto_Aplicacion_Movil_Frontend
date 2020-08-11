@@ -1,3 +1,4 @@
+import 'package:application/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
@@ -151,9 +152,14 @@ class _LoginFormState extends State<LoginForm> {
     final formState = _formKey.currentState;
     if (formState.validate()){
       formState.save();
+      
       //await consult to database
-      Navigator.pushAndRemoveUntil(context,
-                        MaterialPageRoute(builder: (context) => Home(user: _username)), (route) => false);
+      if (_username == user.username && _password == user.password){
+        Navigator.pushAndRemoveUntil(context,
+                                MaterialPageRoute(builder: (context) => Home(user: user)), (route) => false);
+
+      }
+      
     }
 
 

@@ -1,3 +1,4 @@
+import 'package:application/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class Principal extends StatelessWidget {
     this.user,
     this.curiosity
   }): super(key: key);
-  final String user;
+  final User user;
   final String curiosity;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class Principal extends StatelessWidget {
                   padding: EdgeInsets.all(30.0),
                   child: Container(
                     //color: Colors.blue,
-                    child: Text("¡Bienvenido ${this.user}!",
+                    child: Text("¡Hola ${this.user.firstname} ${this.user.lastname}!",
                       style: TextStyle(
                         fontSize: 24,
                       ),
