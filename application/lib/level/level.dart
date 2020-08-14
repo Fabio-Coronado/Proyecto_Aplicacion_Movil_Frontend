@@ -1,22 +1,26 @@
-import 'package:application/models/user.dart';
-import 'package:flutter/material.dart';
+import 'package:application/level/components/body.dart';
+import 'package:application/models/categorie.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:application/models/user.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'components/body.dart';
 
-
-class Competir extends StatelessWidget {
+class Level extends StatelessWidget {
   final User user;
-  Competir({
+  final Categorie categoria;
+  const Level({
     Key key,
     this.user,
-  }): super(key: key); 
+    this.categoria,
+  }
+  ):super(key : key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            "Categoría",
+            "Nivel",
             style: GoogleFonts.mcLaren(
               fontSize:30,
             ),
@@ -24,7 +28,7 @@ class Competir extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.green,    
       ),
-      body: Body(user: user),
+      body: Body(user: user, categoria: categoria),
           
     );
   }

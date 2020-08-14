@@ -25,10 +25,10 @@ class MainLoginWidgetState extends State<AppWidget>{
           ),
           Positioned.fill(
             child: Align(
-              alignment: Alignment(-0.5, -0.5),
+              alignment: Alignment(0, -0.4),
               child: Container(
-                width: 150,
-                height: 150,
+                width: 200,
+                height: 200,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   image: DecorationImage(

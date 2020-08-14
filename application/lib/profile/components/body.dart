@@ -1,8 +1,25 @@
+import 'dart:math';
 import 'package:application/login/mytextformfield.dart';
 import 'package:application/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart' as validator;
+import 'package:multi_charts/multi_charts.dart';
+
+double maximo(Map<int, double> lista){
+    double maximo = 0.0;
+    List<double> sortedKeys = lista.values.toList(growable:false);
+    maximo = sortedKeys.reduce(max);
+    return maximo;
+} 
+
+double total(Map<int, double> lista){
+    double maximo = 0.0;
+    List<double> sortedKeys = lista.values.toList(growable:false);
+    maximo = sortedKeys.reduce((a, b) => a + b);
+    return maximo;
+} 
+
 
 class Body extends StatefulWidget {
   final User user;
@@ -76,7 +93,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        "Record: ${widget.user.record} puntos",
+                        "Record: ${total(widget.user.performance)} puntos",
                         style: TextStyle(
                           fontSize: 16,
                         ),
@@ -102,7 +119,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                     ),
                     Tab(
                       child: Text(
-                        "Cambiar contraseña",
+                        "Desempeño",
                         style: TextStyle(
                           color: Colors.black,
                         )
@@ -117,10 +134,28 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                     controller: _tabController,
                     children: <Widget>[
                       Tab(
-                        child: EditData(),
+                        child: ListView(
+                            children: <Widget >[
+                            SizedBox(height: 20),
+                            ExpansionTile(
+                              title: Text("Cambiar nombre"),
+                              children: <Widget> [
+                                EditData(),                           
+                              ]
+                            ),
+                            Divider(),
+                            ExpansionTile(
+                              title: Text("Cambiar contraseña"),
+                              children: <Widget> [
+                                EditPassword(),                           
+                              ]
+                            ),
+                            ]
+                        ),
+                          
                       ),
                       Tab(
-                        child: EditPassword(),
+                        child: Rendimiento(user: widget.user),
                       ),
 
                     ],
@@ -306,5 +341,38 @@ class _EditPasswordState extends State<EditPassword> {
         ),
           ),
   );
+  }
+}
+
+class Rendimiento extends StatelessWidget {
+  final User user;
+  Rendimiento({
+    Key key,
+    this.user,
+  }): super(key: key);
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+            width: 450,
+            height: 450,
+            //Radar Chart
+            child: RadarChart(
+              values: [user.performance[1], user.performance[2], 
+              user.performance[3], 
+              user.performance[4], user.performance[5]],
+              labels: [
+                "Matemática",
+                "Física",
+                "Química",
+                "Biología",
+                "Informática",
+              ],
+              maxValue: maximo(user.performance),
+              fillColor: Colors.blue,
+              chartRadiusFactor: 0.7,
+            ),
+    );
   }
 }

@@ -14,24 +14,14 @@ class Principal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
           child: Container(
-            child: ListView(
-              padding: EdgeInsets.all(5.0),
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(30.0),
-                  child: Container(
-                    //color: Colors.blue,
-                    child: Text("¡Hola ${this.user.firstname} ${this.user.lastname}!",
-                      style: TextStyle(
-                        fontSize: 24,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),               
+            child: ListView( 
+              padding: const EdgeInsets.only(
+                  top: 10.0
+                ),            
+              children: <Widget>[        
                 Container(
-                  color: Colors.red,
-                  child: Text("Curiosidad del día:",
+                  //color: Colors.red,
+                  child: Text("Dato del día:",
                     style: TextStyle(
                       fontSize: 24,
                     ),
@@ -40,33 +30,54 @@ class Principal extends StatelessWidget {
                 ),  
                 //Curiosidad del dia
                 Padding(
-                  padding: EdgeInsets.all(40.0),
+                  padding: EdgeInsets.all(20.0),
                   child: Container(
-                    child: Column(
-                      children: <Widget>[                     
-                        
-                        Container(
-                          child: Text("Titulo",
-                          style: TextStyle(
-                            fontSize: 20,
-
-                          ),
-                          textAlign: TextAlign.center,
-                          )
+                    decoration: BoxDecoration(
+                      //color: const Color(0xff7c94b6),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)
+                      ),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 2,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 8,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
                         ),
-                        Container(
-                          child: Text(this.curiosity,
-                          textAlign: TextAlign.justify
-                          ),
-                        )
-                    
                       ],
+                      //borderRadius: BorderRadius.circular(12),
+                    ) ,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: <Widget>[                                           
+                          Container(
+                            child: Text("Titulo",
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                            textAlign: TextAlign.center,
+                            )
+                          ),
+                          Container(
+                            child: Text(this.curiosity,
+                            textAlign: TextAlign.justify
+                            ),
+                          )                    
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 //Noticias
-                Container(
-                  color: Colors.red,
+                Container(                  
                   child: Text("Noticias:",
                     style: TextStyle(
                       fontSize: 24,
@@ -75,7 +86,7 @@ class Principal extends StatelessWidget {
                   ),
                 ),     
                 Padding(
-                  padding: EdgeInsets.all(40.0),
+                  padding: EdgeInsets.all(20.0),
                   child:   Container(
                     child: Column(
                       children: <Widget>[
@@ -94,7 +105,29 @@ class Principal extends StatelessWidget {
                         )
                       
                       ],
-                    ),              
+                    ), 
+                    decoration: BoxDecoration(
+                      //color: const Color(0xff7c94b6),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10)
+                      ),
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 2,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 8,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
+                        ),
+                      ],
+                      //borderRadius: BorderRadius.circular(12),
+                    ) ,             
                   ),
                 ),
               ],

@@ -1,5 +1,4 @@
-//import 'package:application/login/mytextformfield.dart';
-import 'package:application/login/mytextformfield.dart';
+import 'mytextformfield.dart';
 import 'package:application/models/categorie.dart';
 import 'package:application/models/user.dart';
 import 'package:flutter/cupertino.dart';
@@ -76,15 +75,32 @@ class _DropdownBtnState extends State<DropdownBtn> {
                     //padding: EdgeInsets.all(8.0),
                     //alignment: Alignment.center,
                     child: DropdownButtonFormField<String>(
-                      
+                      decoration: InputDecoration(
+                        errorBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Colors.red
+                            )
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Colors.green
+                          )
+                        ),
+
+                      ),
                       items: categories.map((categorie) {
                         return DropdownMenuItem<String>(
-                          child: new Text(categorie.title,
-                          //textAlign: TextAlign.center,
-                          style: TextStyle(
-                            
-                            color: Colors.black87,
-                            
+                          child: Container(
+                            width: 200,
+                            child: Text(categorie.title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              
+                              color: Colors.black87,
+                              
+                              ),
                             ),
                           ),
                           value: categorie.title,
@@ -184,12 +200,15 @@ class _DropdownBtnState extends State<DropdownBtn> {
                   ),
                   SizedBox(height: 5), 
                   //alternativas
-                  Container(
-                    child: Text("Alternativas: ",
-                    style: TextStyle(
-                      fontSize: 18,
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Container(
+                      child: Text("Alternativas: ",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                      )
                     ),
-                    )
                   ),
 
                   MyTextFormField(
@@ -256,8 +275,6 @@ class _DropdownBtnState extends State<DropdownBtn> {
                     },
 
                   ),
-                  
-
 
                   RaisedButton(
                     color: Colors.green,

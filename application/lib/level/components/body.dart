@@ -1,16 +1,27 @@
+import 'package:application/models/categorie.dart';
 import 'package:application/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:application/models/categorie.dart';
-
+import 'package:application/models/levels.dart';
 import 'item_card.dart';
 
-class Body extends StatelessWidget {
+
+
+class Body extends StatefulWidget {
   final User user;
+  final Categorie categoria;
+  
   Body({
     Key key,
     this.user,
+    this.categoria,
   }): super(key: key); 
+
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,7 +33,7 @@ class Body extends StatelessWidget {
             child: Container(
               //color: Colors.red,
               child: Text(
-                "Elija una Categoría:",
+                "Elija un Nivel:",
                 style: TextStyle(
                   fontSize: 25,
                 ),
@@ -33,14 +44,15 @@ class Body extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: ListView.builder(
-                itemCount: categories.length,
+             child: ListView.builder(
+                itemCount: levels.length,
                 itemBuilder: (context, index) => ItemCard(
-                  user: user,
-                  categorie: categories[index],                  
+                  user: widget.user,
+                  categoria: widget.categoria,
+                  level: levels[index],                  
                 ),
               ) 
-          )
+              )          
           )
         ] ,
     ),

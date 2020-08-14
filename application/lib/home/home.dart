@@ -1,4 +1,5 @@
 import 'package:application/competir/competir.dart';
+import 'package:application/login/mainlogin.dart';
 import 'package:application/models/user.dart';
 import 'package:application/profile/profile.dart';
 import 'package:application/sugerencia/sugerencia.dart';
@@ -25,15 +26,43 @@ class _HomeState extends State<Home>{
   @override 
   Widget build(BuildContext context){
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Principal",
-            style: GoogleFonts.mcLaren(
-              fontSize:30,
-            ),
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(250.0),
+            child: Stack(
+              children: <Widget>[AppBar(
+              centerTitle: true,
+              backgroundColor: Colors.green,         
+              flexibleSpace: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 40.0
+                  ),
+                  child: Container(
+                    //color: Colors.red,
+                    height: 250,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Hola ${widget.user.firstname} ${widget.user.lastname}",
+                        style: TextStyle(
+                          fontSize: 40,
+                          color: Colors.white
+                        ),
+                        //textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+                  
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(30),
+                  ),
+                ),
+
           ),
-          centerTitle: true,
-          backgroundColor: Colors.green,
+                          ]),
         ),
         body: Principal(user: widget.user, curiosity: curiosity),
         drawer: LateralMenu(user: widget.user),
@@ -79,7 +108,7 @@ class LateralMenu extends StatelessWidget{
               onTap: () => {
                 Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Competir()),
+                MaterialPageRoute(builder: (context) => Competir(user: user)),
               )
               },
             ),
@@ -107,7 +136,10 @@ class LateralMenu extends StatelessWidget{
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Cerrar sesión'),
-              onTap: () => {Navigator.of(context).pop()},
+              onTap: () => {             
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AppWidget())),
+                
+                },
             ),
           
           ],

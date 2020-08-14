@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MyTextFormField extends StatelessWidget {
   final String hintText;
@@ -21,17 +20,16 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column (
       children: <Widget>[
- 
         Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(2.0),
         child: Container(
-            width: 300,
+            width: 250,
             child: TextFormField(              
               decoration: InputDecoration(    
-                labelText: hintText,
-                labelStyle: TextStyle(
+                hintText: hintText,
+                hintStyle: TextStyle(
                   color: Colors.grey, 
-                  fontSize: 16,
+                  fontSize: 12,
                 ),
                 enabledBorder: UnderlineInputBorder(      
                   borderSide: BorderSide(
@@ -54,15 +52,11 @@ class MyTextFormField extends StatelessWidget {
                 //border: InputBorder.none,
                 filled: true,
                 fillColor: Colors.grey[200],
-                errorStyle: TextStyle(
-                  fontSize: 13,
-                )
-                
               ),
               obscureText: isPassword ? true : false,
               validator: validator,
-              onSaved: onSaved, 
-              
+              onSaved: onSaved,
+              maxLength: 25 ,
             ),
           )
         )
