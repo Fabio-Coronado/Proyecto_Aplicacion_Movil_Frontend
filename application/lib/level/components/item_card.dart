@@ -26,12 +26,80 @@ class ItemCard extends StatefulWidget {
 }
 
 class _ItemCardState extends State<ItemCard> { 
-  String _selected = "";
   @override
   Widget build(BuildContext context) {
-   
-    return GestureDetector(
-      onTap: () { 
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+          child: Container(
+            width: 400,
+            height: 150,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image:  AssetImage(widget.level.image),
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: OutlineButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)
+              ),
+              onPressed: press,             
+              borderSide: BorderSide(
+                width: 4.0, 
+                color: Colors.grey
+              ),
+              splashColor: Colors.green,
+              highlightedBorderColor: Colors.green,
+              child: Stack(
+                children:<Widget>[
+                  Text(widget.level.title,
+                  style: TextStyle(
+                    //fontWeight: FontWeight.bold,
+                    //color: Color(0xff05ff00),
+                    fontSize: 40,
+                    foreground: Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 4
+                      ..color = Colors.black,
+                    
+                    ),
+                  ),
+                  Text(widget.level.title,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff19d125),
+                    fontSize: 40,            
+                    ),
+                  ),
+                ]
+              ),
+            ),
+          ),
+        ),
+      );
+  }
+
+
+  void press(){
+        
+        print(widget.user.firstname);
+        print(widget.user.lastname);   
+        print(widget.categoria.title);                
+        print(widget.level.title);
+        
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => 
+          QuestionScreen(user: widget.user, categoria: widget.categoria, level: widget.level)),
+        );
+
+  }
+}
+
+/*
+     onTap: () { 
         setState((){
           _selected = widget.level.title;
         });       
@@ -52,61 +120,5 @@ class _ItemCardState extends State<ItemCard> {
         );
         
         }, 
-      child: Stack(
-        //crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              height: 150,
-              //margin: const EdgeInsets.all(3.0),         
-              //padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                border: _selected == widget.level.title ? Border.all(
-                  color: Colors.green,
-                  width: 4,
-                ) : Border.all(
-                  color: Colors.grey,
-                  width: 4,
-                ),
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image:  AssetImage(widget.level.image),
-                  fit: BoxFit.fill,
-                ),
-              ), 
-            ),
-          ),          
-          Container(
-            height: 150,
-            alignment: Alignment.center,
-            child:Stack(
-              children:<Widget>[ 
-                Text(widget.level.title,
-                style: TextStyle(
-                  //fontWeight: FontWeight.bold,
-                  //color: Color(0xff05ff00),
-                  fontSize: 40,
-                  foreground: Paint()
-                    ..style = PaintingStyle.stroke
-                    ..strokeWidth = 4
-                    ..color = Colors.black,
-                  
-                  ),
-                ),
-                Text(widget.level.title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xff19d125),
-                  fontSize: 40,            
-                  ),
-                ),
-              ]
-            )
-          )
-        ]
-      ),
-      
-    );
-  }
-}
+
+        */

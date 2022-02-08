@@ -1,109 +1,110 @@
 import 'package:application/models/question.dart';
 
-List<Question> questions = [
+List<Question> questions3 = [
   
   new Question(
   id: 1,
   image: "",
-  content: "En una grafo completo G, que tiene 12 vértices, ¿cuántas aristas hay?",
-  categorie: 1,
+  content: "¿Qué significa 'hippopotamus' y en qué idioma?",
+  categorie: 3,
   level: 1,
   alternativas:  [
   new Alternative(
     number: 1,
-    content: "67"
+    content: "Caballo de río (griego)"
   ),
     new Alternative(
     number: 2,
-    content: "66"
+    content: "Caballo de río (Latín)"
   ),
     new Alternative(
     number: 3,
-    content: "34"
+    content: "Cerdo gordo (griego)"
   ),
     new Alternative(
     number: 4,
-    content: "11"
-  )
-],
-  correct: 2
-),
-  new Question(
-  id: 2,
-  image: "",
-  content: "¿Cuál es el número romano para 500?",
-  categorie: 1,
-  level: 1,
-  alternativas: [
-  new Alternative(
-    number: 1,
-    content: "L"
-  ),
-    new Alternative(
-    number: 2,
-    content: "C"
-  ),
-    new Alternative(
-    number: 3,
-    content: "X"
-  ),
-    new Alternative(
-    number: 4,
-    content: "D"
-  )
-],
-  correct: 4
-),
-
- new Question(
-  id: 3,
-  image: "",
-  content: "Al número entero más cercano, ¿cuántos radianes hay en un círculo completo?",
-  categorie: 1,
-  level: 1,
-  alternativas: [
-  new Alternative(
-    number: 1,
-    content: "6"
-  ),
-    new Alternative(
-    number: 2,
-    content: "3"
-  ),
-    new Alternative(
-    number: 3,
-    content: "2"
-  ),
-    new Alternative(
-    number: 4,
-    content: "4"
+    content: "Cerdo gordo (Latín)"
   )
 ],
   correct: 1
 ),
 
- new Question(
-  id: 4,
+  new Question(
+  id: 2,
   image: "",
-  content: "En el sistema hexadecimal, ¿qué número viene después del 9?",
-  categorie: 1,
+  content: "¿Qué tipo de animal es una epidalea?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "El número 0"
+    content: "Insecto"
   ),
     new Alternative(
     number: 2,
-    content: "16"
+    content: "Pez"
   ),
     new Alternative(
     number: 3,
-    content: "11"
+    content: "Cerdo gordo (griego)"
   ),
     new Alternative(
     number: 4,
-    content: "La letra a"
+    content: "Pájaro"
+  )
+],
+  correct: 2
+),
+
+new Question(
+  id: 3,
+  image: "",
+  content: "¿Cuál es el nombre científico de los humanos de hoy en día?",
+  categorie: 3,
+  level: 1,
+  alternativas:  [
+  new Alternative(
+    number: 1,
+    content: "Homo Erectus"
+  ),
+    new Alternative(
+    number: 2,
+    content: "Homo Ergaster"
+  ),
+    new Alternative(
+    number: 3,
+    content: "Homo Sapiens"
+  ),
+    new Alternative(
+    number: 4,
+    content: "Homo Neanderthalensis"
+  )
+],
+  correct: 3
+),
+
+new Question(
+  id: 4,
+  image: "",
+  content: "¿Qué especie de oso pardo no está extinta?",
+  categorie: 3,
+  level: 1,
+  alternativas:  [
+  new Alternative(
+    number: 1,
+    content: "Oso grizzly mexicano"
+  ),
+    new Alternative(
+    number: 2,
+    content: "Oso Atlas"
+  ),
+    new Alternative(
+    number: 3,
+    content: "Oso grizzly de California"
+  ),
+    new Alternative(
+    number: 4,
+    content: "Oso pardo sirio"
   )
 ],
   correct: 4
@@ -112,79 +113,79 @@ List<Question> questions = [
 new Question(
   id: 5,
   image: "",
-  content: "¿Cómo se representa el número 9 como un número binario?",
-  categorie: 1,
+  content: "¿La cachemira es la lana de qué tipo de animal? ",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "1000"
+    content: "Llama"
   ),
     new Alternative(
     number: 2,
-    content: "1001"
+    content: "Camello"
   ),
     new Alternative(
     number: 3,
-    content: "1110"
+    content: "Cabra"
   ),
     new Alternative(
     number: 4,
-    content: "1010"
-  )
-],
-  correct: 1
-),
-
-new Question(
-  id: 6,
-  image: "",
-  content: "¿Cuál es el valor aproximado de la constante matemática e?",
-  categorie: 1,
-  level: 1,
-  alternativas: [
-  new Alternative(
-    number: 1,
-    content: "1.62"
-  ),
-    new Alternative(
-    number: 2,
-    content: "3.14"
-  ),
-    new Alternative(
-    number: 3,
-    content: "2.72"
-  ),
-    new Alternative(
-    number: 4,
-    content: "1.41"
+    content: "Oveja"
   )
 ],
   correct: 3
 ),
 
 new Question(
-  id: 7,
+  id: 6,
   image: "",
-  content: "¿Cuántos ceros hay en un gúgol?",
-  categorie: 1,
+  content: "¿Cuál es el nombre científico del \'oso polar\'? ",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "100"
+    content: "Oso polar"
   ),
     new Alternative(
     number: 2,
-    content: "10"
+    content: "Ursus Maritimus"
   ),
     new Alternative(
     number: 3,
-    content: "1,000"
+    content: "Ursus Spelaeus"
   ),
     new Alternative(
     number: 4,
-    content: "1,000,000"
+    content: "Ursus Arctos"
+  )
+],
+  correct: 2
+),
+
+new Question(
+  id: 7,
+  image: "",
+  content: "¿De qué está hecho el cuerno de rinoceronte?  ",
+  categorie: 3,
+  level: 1,
+  alternativas:  [
+  new Alternative(
+    number: 1,
+    content: "Queratina"
+  ),
+    new Alternative(
+    number: 2,
+    content: "Hueso"
+  ),
+    new Alternative(
+    number: 3,
+    content: "Marfil"
+  ),
+    new Alternative(
+    number: 4,
+    content: "Piel"
   )
 ],
   correct: 1
@@ -193,53 +194,52 @@ new Question(
 new Question(
   id: 8,
   image: "",
-  content: "¿Cuál es el área de un círculo con un diámetro de 20 pulgadas si pi = 3,1415?",
-  categorie: 1,
+  content: "¿A qué suborden científico pertenece la familia de hiénidos?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "380.1215 pulgadas"
+    content: "Ciconiiformes"
   ),
     new Alternative(
     number: 2,
-    content: "314.15 pulgadas"
+    content: "Caniformia"
   ),
     new Alternative(
     number: 3,
-    content: "3141.5 pulgadas"
+    content: "Haplorhini"
   ),
     new Alternative(
     number: 4,
-    content: "1256.6 pulgadas"
+    content: "Feliformia"
   )
 ],
-  correct: 2
+  correct: 4
 ),
-
 
 new Question(
   id: 9,
   image: "",
-  content: "¿Cuáles son los primeros 6 dígitos del número &quot;Pi&quot;?",
-  categorie: 1,
+  content: "¿Cuántas especies vivas conocidas de hienas hay?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "3.14159"
+    content: "4"
   ),
     new Alternative(
     number: 2,
-    content: "3.14169"
+    content: "8"
   ),
     new Alternative(
     number: 3,
-    content: "3.12423"
+    content: "2"
   ),
     new Alternative(
     number: 4,
-    content: "3.25812"
+    content: "6"
   )
 ],
   correct: 1
@@ -248,80 +248,79 @@ new Question(
 new Question(
   id: 10,
   image: "",
-  content: "En números romanos, ¿qué significa XL?",
-  categorie: 1,
+  content: "¿Por qué razón una hiena manchada se 'reiría'?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "15"
+    content: "Agresividad"
   ),
     new Alternative(
     number: 2,
-    content: "60"
+    content: "Nerviosismo"
   ),
     new Alternative(
     number: 3,
-    content: "40"
+    content: "Excitación"
   ),
     new Alternative(
     number: 4,
-    content: "90"
-  )
-],
-  correct: 3
-),
-
-new Question(
-  id: 11,
-  image: "",
-  content: "¿Cuál es la raíz cuadrada de 2,401?",
-  categorie: 1,
-  level: 1,
-  alternativas: [
-  new Alternative(
-    number: 1,
-    content: "51"
-  ),
-    new Alternative(
-    number: 2,
-    content: "49"
-  ),
-    new Alternative(
-    number: 3,
-    content: "59"
-  ),
-    new Alternative(
-    number: 4,
-    content: "39"
+    content: "Agotamiento"
   )
 ],
   correct: 2
 ),
 
+new Question(
+  id: 11,
+  image: "",
+  content: "¿Por qué razón una hiena manchada se 'reiría'?",
+  categorie: 3,
+  level: 1,
+  alternativas:  [
+  new Alternative(
+    number: 1,
+    content: "Agresividad"
+  ),
+    new Alternative(
+    number: 2,
+    content: "Nerviosismo"
+  ),
+    new Alternative(
+    number: 3,
+    content: "Excitación"
+  ),
+    new Alternative(
+    number: 4,
+    content: "Agotamiento"
+  )
+],
+  correct: 2
+),
 
 new Question(
   id: 12,
   image: "",
-  content: "¿Cuántos zeptómetros hay dentro de un femtómetro?",
-  categorie: 1,
+  content: "¿Cuál es el nombre científico del guepardo?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "10"
+    content: "Felis catus"
   ),
     new Alternative(
     number: 2,
-    content: "1,000,000,000"
+    content: "Lynx rufus"
   ),
     new Alternative(
     number: 3,
-    content: "1,000,000"
+    content: "Acinonyx jubatus"
   ),
     new Alternative(
     number: 4,
-    content: "1000"
+    content: "Panthera onca"
   )
 ],
   correct: 3
@@ -331,81 +330,79 @@ new Question(
 new Question(
   id: 13,
   image: "",
-  content: "¿Cuál es el primer exponente primo de Mersenne sobre 1000?",
-  categorie: 1,
+  content: "La especie ahora extinta 'Tilacino' era nativa de dónde?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "1069"
+    content: "Oregon, United States"
   ),
     new Alternative(
     number: 2,
-    content: "1009"
+    content: "Wallachia, Romania"
   ),
     new Alternative(
     number: 3,
-    content: "2203"
+    content: "Baluchistan, Pakistan"
   ),
     new Alternative(
     number: 4,
-    content: "1279"
+    content: "Tasmania, Australia"
   )
 ],
   correct: 4
 ),
 
-
 new Question(
   id: 14,
   image: "",
-  content: "¿Cúantos primos hay antes de 19?",
-  categorie: 1,
+  content: "¿Cuál de estos animales NO es un lagarto?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "5"
+    content: "Monstruo Gila"
   ),
     new Alternative(
     number: 2,
-    content: "8"
+    content: "Dragon de Komodo"
   ),
     new Alternative(
     number: 3,
-    content: "7"
+    content: "Tuatara"
   ),
     new Alternative(
     number: 4,
-    content: "9"
+    content: "Iguana verde"
   )
 ],
   correct: 3
 ),
 
-
 new Question(
   id: 15,
   image: "",
-  content: "¿Cuál es la representación alfanumérica del número imaginario?",
-  categorie: 1,
+  content: "¿Qué tipo de criatura es un bonobo?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "i"
+    content: "Mono"
   ),
     new Alternative(
     number: 2,
-    content: "e"
+    content: "León"
   ),
     new Alternative(
     number: 3,
-    content: "n"
+    content: "Loro"
   ),
     new Alternative(
     number: 4,
-    content: "x"
+    content: "Gato montés"
   )
 ],
   correct: 1
@@ -414,79 +411,80 @@ new Question(
 new Question(
   id: 16,
   image: "",
-  content: "Al número entero más cercano, ¿cuántos radianes hay en un círculo completo?",
-  categorie: 1,
+  content: "¿Cuál de estas especies no está extinta?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "6"
+    content: "Gacela saudí"
   ),
     new Alternative(
     number: 2,
-    content: "3"
+    content: "Tigre de Tasmania"
   ),
     new Alternative(
     number: 3,
-    content: "4"
+    content: "León marino japonés"
   ),
     new Alternative(
     number: 4,
-    content: "5"
+    content: "Dragón de Komodo"
+  )
+],
+  correct: 4
+),
+
+
+new Question(
+  id: 17,
+  image: "",
+  content: "A diferencia de la mayoría de las salamandras, ¿Qué parte de un tritón es plana?",
+  categorie: 3,
+  level: 1,
+  alternativas:  [
+  new Alternative(
+    number: 1,
+    content: "Cola"
+  ),
+    new Alternative(
+    number: 2,
+    content: "Cabeza"
+  ),
+    new Alternative(
+    number: 3,
+    content: "Dientes"
+  ),
+    new Alternative(
+    number: 4,
+    content: "Patas"
   )
 ],
   correct: 1
 ),
 
 new Question(
-  id: 17,
-  image: "",
-  content: "¿Qué letra griega se usa para significar la sumatoria?",
-  categorie: 1,
-  level: 1,
-  alternativas: [
-  new Alternative(
-    number: 1,
-    content: "Delta"
-  ),
-    new Alternative(
-    number: 2,
-    content: "Sigma"
-  ),
-    new Alternative(
-    number: 3,
-    content: "Alpha"
-  ),
-    new Alternative(
-    number: 4,
-    content: "Omega"
-  )
-],
-  correct: 2
-),
-
-new Question(
   id: 18,
   image: "",
-  content: "¿Cuál sería el número decimal 31 en hexadecimal?",
-  categorie: 1,
+  content: "¿Cuál es el nombre de la familia de la que es miembro el gato doméstico?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "2E"
+    content: "Cat"
   ),
     new Alternative(
     number: 2,
-    content: "3D"
+    content: "Felis"
   ),
     new Alternative(
     number: 3,
-    content: "1F"
+    content: "Felidae"
   ),
     new Alternative(
     number: 4,
-    content: "1B"
+    content: "Felinae"
   )
 ],
   correct: 3
@@ -495,107 +493,106 @@ new Question(
 new Question(
   id: 19,
   image: "",
-  content: "¿Cuántos lados tiene un heptágono?",
-  categorie: 1,
+  content: "¿Cuál es el animal más rápido?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "8"
+    content: "Águila real"
   ),
     new Alternative(
     number: 2,
-    content: "6"
+    content: "Halcón peregrino"
   ),
     new Alternative(
     number: 3,
-    content: "7"
+    content: "Guepardo"
   ),
     new Alternative(
     number: 4,
-    content: "5"
+    content: "Tábano"
   )
 ],
-  correct: 3
+  correct: 2
 ),
 
 new Question(
   id: 20,
   image: "",
-  content: "¿Cómo se llama la curva plana propuesta por Descartes para desafiar las técnicas de búsqueda de extremos de Fermat?",
-  categorie: 1,
+  content: "¿Cuál de los siguientes es otro nombre para la \'Poecilotheria Metallica Tarantula\'?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "Helicoide de Descartes"
+    content: "Gooty"
   ),
     new Alternative(
     number: 2,
-    content: "Coordenadas cartesianas"
+    content: "Hopper"
   ),
     new Alternative(
     number: 3,
-    content: "Paraboloide elíptica de Descartes"
+    content: "Silver Stripe"
   ),
     new Alternative(
     number: 4,
-    content: "Folium de Descartes"
-  )
-],
-  correct: 4
-),
-
-
-new Question(
-  id: 21,
-  image: "",
-  content: "El matemático francés Évariste Galois es conocido principalmente por su trabajo ¿en qué?",
-  categorie: 1,
-  level: 1,
-  alternativas: [
-  new Alternative(
-    number: 1,
-    content: "Teoría de Galois"
-  ),
-    new Alternative(
-    number: 2,
-    content: "Fracciones continuas de Galois"
-  ),
-    new Alternative(
-    number: 3,
-    content: "Método de Galois para PDE"
-  ),
-    new Alternative(
-    number: 4,
-    content: "Integración abeliana"
+    content: "Woebegone"
   )
 ],
   correct: 1
 ),
 
 new Question(
-  id: 22,
+  id: 21,
   image: "",
-  content: "¿Cuál es el orden correcto de operaciones para resolver ecuaciones?",
-  categorie: 1,
+  content: "¿De qué color es el mirlo hembra?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "El orden en el que se escriben las operaciones."
+    content: "Blanco"
   ),
     new Alternative(
     number: 2,
-    content: "Paréntesis, exponentes, suma, resta, multiplicación, división"
+    content: "Amarillo"
   ),
     new Alternative(
     number: 3,
-    content: "Paréntesis, exponentes, multiplicación, división, suma, resta"
+    content: "Negro"
   ),
     new Alternative(
     number: 4,
-    content: "Suma, multiplicación, división, resta, suma, paréntesis"
+    content: "Marrón"
+  )
+],
+  correct: 4
+),
+
+new Question(
+  id: 22,
+  image: "",
+  content: "¿Cuántos dientes tiene un conejo adulto?",
+  categorie: 3,
+  level: 1,
+  alternativas:  [
+  new Alternative(
+    number: 1,
+    content: "30"
+  ),
+    new Alternative(
+    number: 2,
+    content: "26"
+  ),
+    new Alternative(
+    number: 3,
+    content: "28"
+  ),
+    new Alternative(
+    number: 4,
+    content: "24"
   )
 ],
   correct: 3
@@ -604,30 +601,28 @@ new Question(
 new Question(
   id: 23,
   image: "",
-  content: "¿Cuántos lados tiene un trapecio?",
-  categorie: 1,
+  content: "¿Qué pájaro nace con garras en los dedos de sus alas?",
+  categorie: 3,
   level: 1,
-  alternativas: [
+  alternativas:  [
   new Alternative(
     number: 1,
-    content: "4"
+    content: "Hoatzin"
   ),
     new Alternative(
     number: 2,
-    content: "3"
+    content: "Cormorán"
   ),
     new Alternative(
     number: 3,
-    content: "5"
+    content: "Casuario"
   ),
     new Alternative(
     number: 4,
-    content: "6"
+    content: "Pájaro secretario"
   )
 ],
   correct: 1
 ),
-
-
 ];
 

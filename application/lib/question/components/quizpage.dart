@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:application/home/home.dart';
+import 'package:application/models/categorie.dart';
 import 'package:application/models/question.dart';
 import 'package:application/models/user.dart';
 import 'package:application/question/components/result.dart';
@@ -10,9 +11,10 @@ import 'package:flutter/material.dart';
 class Quizpage extends StatefulWidget {
    final List<Question> questions;
    final User user;
+   final Categorie categoria;
 
 
-  Quizpage({Key key, @required this.questions, @required this.user}) : super(key: key);
+  Quizpage({Key key, @required this.questions, @required this.user, this.categoria}) : super(key: key);
   @override
   _QuizpageState createState() => _QuizpageState();
 }
@@ -87,7 +89,7 @@ class _QuizpageState extends State<Quizpage> {
 
   void nextquestion() {
     canceltimer = false;
-    timer = 30;
+    timer = 20;
     setState(() {
       if (j < widget.questions.length) {
         i = random_array[j];
@@ -113,7 +115,9 @@ class _QuizpageState extends State<Quizpage> {
 
       colortoshow = right;
     } else {
-
+      
+      marks = marks - 10;
+      
       colortoshow = wrong;
     }
     setState(() {
@@ -137,7 +141,7 @@ class _QuizpageState extends State<Quizpage> {
           widget.questions[i].alternativas[k-1].content,
           style: TextStyle(
             color: Colors.white,
-            //fontFamily: "Alike",
+           
             fontSize: 16.0,
           ),
           maxLines: 1,
@@ -184,7 +188,7 @@ class _QuizpageState extends State<Quizpage> {
                 flex: 3,
                 child: Container(
                   padding: EdgeInsets.all(15.0),
-                  alignment: Alignment.bottomLeft,
+                  alignment: Alignment.bottomCenter,
                   child: Text(
                     widget.questions[i].content,
                     style: TextStyle(
@@ -242,7 +246,7 @@ class _QuizpageState extends State<Quizpage> {
         //canceltimer = true;
         Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(
-          builder: (context) => Resultpage(user: widget.user, marks: marks)),
+          builder: (context) => Resultpage(user: widget.user, marks: marks, categoria: widget.categoria)),
           (route) => false
         );
 

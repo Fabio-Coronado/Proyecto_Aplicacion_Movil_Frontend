@@ -1,22 +1,21 @@
 
 
 class User{
-  final String firstname, lastname, correo, image, username, password;
-  final int id, record;
-  Map<int, double> performance;
+  String firstname, lastname, email, image, username, password;
+  String token;
+  Map<String, double> performance;
   User({
-    this.id,
+    this.token,
     this.username,
     this.password,
     this.firstname,
     this.lastname,
-    this.correo,
+    this.email,
     this.image,
-    this.record,
     this.performance,
   });
 }
-
+/*
 User user = User(
   id: 1,
   username: "emilia", //
@@ -27,10 +26,11 @@ User user = User(
   image: "assets/users/user.jpg",
   record: 203,
   performance: {
-    1: 20.0,
-    2: 30.0,
-    3: 40.0,
-    4: 0.0,
-    5: 0.0,
+    "1": 20.0,
+    "2": 30.0,
+    "3": 40.0,
+    "4": 0.0,
+    "5": 0.0,
   }
 );
+*/

@@ -1,4 +1,8 @@
+import 'package:application/home/home.dart';
+import 'package:application/models/user.dart';
+import 'package:application/services/authservice.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,32 +66,13 @@ class RegisterWidget extends StatelessWidget{
 
 class Model {
   String username;
+  String firstname;
+  String lastname;
   String password;
   String email;
-Model({this.username, this.password, this.email});
+Model({this.username, this.firstname, this.lastname, this.password, this.email});
 }
-/*
-class Result extends StatelessWidget {
-  Model model;
-  Result({this.model});
-  @override
-  Widget build(BuildContext context) {
-    return (Scaffold(
-      appBar: AppBar(title: Text('Terminado')),
-      body: Container(
-        margin: EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(model.username, style: TextStyle(fontSize: 22)),
-            Text(model.password, style: TextStyle(fontSize: 22)),
-          ],
-        ),
-      ),
-    ));
-  }
-}
-*/
+
 class RegisterForm extends StatefulWidget {
   @override
   _RegisterFormState createState() => _RegisterFormState();
@@ -95,6 +80,7 @@ class RegisterForm extends StatefulWidget {
 
 
 class _RegisterFormState extends State<RegisterForm> {
+  var token;
   final _formKey = GlobalKey<FormState>();
   Model model = Model();
 @override
@@ -115,6 +101,32 @@ class _RegisterFormState extends State<RegisterForm> {
           },
           onSaved: (String value) {
             model.username = value;
+          },
+                    ),
+                    MyTextFormField(
+          hintText: 'Nombre',
+          isPassword: false,
+          validator: (String value) {
+            if (value.isEmpty) {
+              return 'Ingresa el Nombre';
+            }
+            return null;
+          },
+          onSaved: (String value) {
+            model.firstname = value;
+          },
+                    ),
+                    MyTextFormField(
+          hintText: 'Apellido',
+          isPassword: false,
+          validator: (String value) {
+            if (value.isEmpty) {
+              return 'Ingresa el Apellido';
+            }
+            return null;
+          },
+          onSaved: (String value) {
+            model.lastname = value;
           },
                     ),
                     MyTextFormField(
@@ -162,17 +174,50 @@ class _RegisterFormState extends State<RegisterForm> {
           },
                     ),
                   
-                    RaisedButton(
-          color: Colors.green,
+          MaterialButton(
+          splashColor: Colors.green,
+          highlightColor: Colors.green,
+          color: Colors.grey,
           onPressed: () {
             if (_formKey.currentState.validate()) {
               _formKey.currentState.save();
-             /* Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Result(model: this.model),
-                      )
-              );*/
+              var token;
+              AuthService().addUser(model.username, model.password, model.email, model.firstname, model.lastname).then((val){
+              if(val.data['success']){
+                token = val.data['token'];
+                print(token);
+                Fluttertoast.showToast(
+                  msg: val.data['msg'],
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.green,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+                  );
+                   AuthService().getinfo(token).then((val2){
+                    User user = User();
+                    print(val2.data['username']);
+                    user.username = val2.data['username'];                
+                    user.firstname = val2.data['firstname'];
+                    user.lastname = val2.data['lastname'];
+                    user.email = val2.data['email'];
+                    user.token = token;
+                    user.performance ={
+                      "1": val2.data['performance']['1'].toDouble(),
+                      "2": val2.data['performance']['2'].toDouble(),
+                      "3": val2.data['performance']['3'].toDouble(),
+                      "4": val2.data['performance']['4'].toDouble(),
+                      "5": val2.data['performance']['5'].toDouble(),
+
+                    };
+                  
+                    Navigator.pushAndRemoveUntil(context,
+                                          MaterialPageRoute(builder: (context) => Home(user: user)), (route) => false);
+                  }); 
+              }
+              }
+            );
             }
           },
           child: Text(

@@ -1,3 +1,6 @@
+import 'package:application/services/authservice.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'mytextformfield.dart';
 import 'package:application/models/categorie.dart';
 import 'package:application/models/user.dart';
@@ -22,7 +25,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
   @override
     Widget build(BuildContext context) {
       return Container(
-        child: DropdownBtn(),
+        child: DropdownBtn(user: widget.user),
         //DropDownBtn();
       );
     }
@@ -31,6 +34,12 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
 
 
 class DropdownBtn extends StatefulWidget {
+  final User user;
+  DropdownBtn({
+    Key key,
+    this.user,
+  }): super(key: key); 
+
   @override
   _DropdownBtnState createState() => _DropdownBtnState();
 }
@@ -42,6 +51,7 @@ class _DropdownBtnState extends State<DropdownBtn> {
   var _alternativa2 ="";
   var _alternativa3 ="";
   var _alternativa4 ="";
+  var _pregunta ="";
   var _hint = "Escoge una categoría";
   @override
   Widget build(BuildContext context) {
@@ -158,6 +168,7 @@ class _DropdownBtnState extends State<DropdownBtn> {
                           if (value.isEmpty) {
                             return 'Ingrese la pregunta';
                           }
+                          _pregunta = value;
                           _formKey.currentState.save();
                           return null;
                         },
@@ -219,7 +230,7 @@ class _DropdownBtnState extends State<DropdownBtn> {
                       if (value.isEmpty) {
                         return 'Ingrese la alternativa';
                       } else {
-                        print(value);
+  
                         _alternativa1 = value;
 
                       }
@@ -235,7 +246,7 @@ class _DropdownBtnState extends State<DropdownBtn> {
                       if (value.isEmpty) {
                         return 'Ingrese la alternativa';
                       } else {
-                        print(value);
+
                         _alternativa2 = value;
 
                       }
@@ -251,7 +262,7 @@ class _DropdownBtnState extends State<DropdownBtn> {
                       if (value.isEmpty) {
                         return 'Ingrese la alternativa';
                       } else {
-                        print(value);
+
                         _alternativa3 = value;
 
                       }
@@ -267,7 +278,7 @@ class _DropdownBtnState extends State<DropdownBtn> {
                       if (value.isEmpty) {
                         return 'Ingrese la alternativa';
                       } else {
-                        print(value);
+
                         _alternativa4 = value;
 
                       }
@@ -276,18 +287,36 @@ class _DropdownBtnState extends State<DropdownBtn> {
 
                   ),
 
-                  RaisedButton(
-                    color: Colors.green,
+                  MaterialButton(
+                    splashColor: Colors.green,
+                    highlightColor: Colors.green,
+                    color: Colors.grey,
                     onPressed: () {
                       
                       if (_formKey.currentState.validate()) {
+                        String categ;
+                        for (int i = 0; i < 5 ;i++){
+                          if(categories[i].title == _categoria){
+                            categ = (i + 1).toString();
+                          }
+                        }
+
                         _formKey.currentState.save();
-                        /* Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Result(model: this.model),
-                                )
-                        );*/                     
+                        //obtener numero de categoria
+                        
+                        AuthService().addSuggest(widget.user.token, categ, _pregunta, _alternativa1, _alternativa2, _alternativa3, _alternativa4).then((val){
+                              if(val.data['success']){
+                              Fluttertoast.showToast(
+                              msg: val.data['msg'],
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                              );   
+                              }
+                        });        
                       }
                     },
                     child: Text(

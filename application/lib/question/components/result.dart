@@ -1,5 +1,7 @@
 import 'package:application/home/home.dart';
+import 'package:application/models/categorie.dart';
 import 'package:application/models/user.dart';
+import 'package:application/services/authservice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 class Resultpage extends StatefulWidget {
   final int marks;
   final User user;
-  Resultpage({Key key , @required this.marks, @required this.user}) : super(key : key);
+  final Categorie categoria;
+  Resultpage({Key key , @required this.marks, @required this.user, this.categoria}) : super(key : key);
   @override
   _ResultpageState createState() => _ResultpageState(marks);
 }
@@ -28,13 +31,25 @@ class _ResultpageState extends State<Resultpage> {
     if(marks <= 20){
       image = images[2];
       message = "Deberías esforzarte..\n" + "Tu puntuación fue $marks";
-    }else if(marks <= 40){
+    }else if(marks <= 60){
       image = images[1];
       message = "Puedes hacerlo mejor..\n" + "Tu puntuación fue $marks";
     }else{
       image = images[0];
       message = "Lo hiciste muy bien..\n" + "Tu puntuación fue $marks";
     }
+    print(widget.user.token);
+    AuthService().getinfo(widget.user.token).then((val){
+      int value = val.data['performance'][widget.categoria.id.toString()].toInt();
+      int resultado = value + marks;
+      print(resultado);
+      if(value >= 20){
+        AuthService().editPerformance(widget.user.username, widget.categoria.id, resultado);
+      }
+    
+    });
+    
+
     super.initState();
   }
 
@@ -106,7 +121,7 @@ class _ResultpageState extends State<Resultpage> {
                     onPressed: (){
                       //actualizar marca del usuario
                      Navigator.pushAndRemoveUntil(context,
-                                  MaterialPageRoute(builder: (context) => Home(user: user)), (route) => false);
+                                  MaterialPageRoute(builder: (context) => Home(user: widget.user)), (route) => false);
                     },
                     child: Text(
                       "Regresar al Inicio",

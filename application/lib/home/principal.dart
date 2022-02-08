@@ -1,15 +1,18 @@
 import 'package:application/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 
 class Principal extends StatelessWidget {
   const Principal({
     Key key,
     this.user,
-    this.curiosity
+    this.curiosity,
+    this.news
   }): super(key: key);
   final User user;
   final String curiosity;
+  final String news;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -58,18 +61,11 @@ class Principal extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: <Widget>[                                           
+
                           Container(
-                            child: Text("Titulo",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                            textAlign: TextAlign.center,
+                            child: HtmlWidget(curiosity,
+                            
                             )
-                          ),
-                          Container(
-                            child: Text(this.curiosity,
-                            textAlign: TextAlign.justify
-                            ),
                           )                    
                         ],
                       ),
@@ -90,18 +86,9 @@ class Principal extends StatelessWidget {
                   child:   Container(
                     child: Column(
                       children: <Widget>[
+
                         Container(
-                          child: Text("Titulo noticia",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.center,
-                          )
-                        ),
-                        Container(
-                          child: Text(this.curiosity,
-                          textAlign: TextAlign.justify
-                          ),
+                          child: HtmlWidget(news)
                         )
                       
                       ],

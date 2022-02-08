@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:application/level/level.dart';
 import 'package:application/models/user.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,60 +21,34 @@ class ItemCard extends StatefulWidget {
 }
 
 class _ItemCardState extends State<ItemCard> {
-  String _selected = "";
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {   
-        setState((){
-          _selected = widget.categorie.title;
-        });   
-        print(widget.user.firstname);
-        print(widget.user.lastname);                   
-        print(widget.categorie.title);
-        Timer(const Duration(milliseconds: 200), () {
-          setState(() {
-            _selected = "";
-          });
-        });
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Level(user: widget.user, categoria: widget.categorie)),
-        );
-
-        }, 
-      child: Stack(
-        //crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Container(
-              height: 150,
-              //margin: const EdgeInsets.all(3.0),         
-              //padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                border: _selected == widget.categorie.title ? Border.all(
-                  color: Colors.green,
-                  width: 4,
-                ):
-                 Border.all(
-                  color: Colors.grey,
-                  width: 4,
-                )
-                ,
-                borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image:  AssetImage(widget.categorie.image),
-                  fit: BoxFit.fill,
-                ),
-              ), 
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          height: 150,
+          width: 400,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image:  AssetImage(widget.categorie.image),
+              fit: BoxFit.fill,
             ),
-          ),          
-          Container(
-            height: 150,
-            alignment: Alignment.center,
+          ),
+          child: OutlineButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20.0)
+            ),
+            onPressed: press,             
+            borderSide: BorderSide(
+              width: 4.0, 
+              color: Colors.grey
+            ),
+            splashColor: Colors.green,
+            highlightedBorderColor: Colors.green,
             child: Stack(
-              children:<Widget>[ 
+              children:<Widget>[
                 Text(widget.categorie.title,
                 style: TextStyle(
                   //fontWeight: FontWeight.bold,
@@ -83,7 +56,7 @@ class _ItemCardState extends State<ItemCard> {
                   fontSize: 40,
                   foreground: Paint()
                     ..style = PaintingStyle.stroke
-                    ..strokeWidth = 3
+                    ..strokeWidth = 4
                     ..color = Colors.black,
                   
                   ),
@@ -96,11 +69,19 @@ class _ItemCardState extends State<ItemCard> {
                   ),
                 ),
               ]
-            )
-          )
-        ]
+            ),
+        ),
+        ),
       ),
-      
+    );
+  }
+  void press(){
+    print(widget.user.firstname);
+    print(widget.user.lastname);                   
+    print(widget.categorie.title);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Level(user: widget.user, categoria: widget.categorie)),
     );
   }
 }

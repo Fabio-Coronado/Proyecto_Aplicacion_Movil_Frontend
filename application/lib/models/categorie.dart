@@ -17,23 +17,23 @@ List<Categorie> categories = [
   ),
   Categorie(
     id: 2,
-    image: "assets/categorias/fisica.jpg",
-    title: "Física"
+    image: "assets/categorias/cienciaynaturaleza.jpg",
+    title: "Ciencia y Naturaleza"
   ),
   Categorie(
     id: 3,
-    image: "assets/categorias/quimica.jpg",
-    title: "Química"
+    image: "assets/categorias/animales.jpg",
+    title: "Animales"
   ),
   Categorie(
     id: 4,
-    image: "assets/categorias/biologia.jpg",
-    title: "Biología"
+    image: "assets/categorias/geografia.jpg",
+    title: "Geografía"
   ),
   Categorie(
     id: 5,
     image: "assets/categorias/informatica.jpg",
-    title: "Informática"
+    title: "Computación"
   ),
 
 ];

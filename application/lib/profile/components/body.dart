@@ -1,20 +1,24 @@
 import 'dart:math';
 import 'package:application/login/mytextformfield.dart';
 import 'package:application/models/user.dart';
+import 'package:application/services/authservice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:application/models/categorie.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:validators/validators.dart' as validator;
 import 'package:multi_charts/multi_charts.dart';
 
-double maximo(Map<int, double> lista){
-    double maximo = 0.0;
+double maximo(Map<String, double> lista){
+    double maximo = 0;
     List<double> sortedKeys = lista.values.toList(growable:false);
     maximo = sortedKeys.reduce(max);
+
     return maximo;
 } 
 
-double total(Map<int, double> lista){
-    double maximo = 0.0;
+double total(Map<String, double> lista){
+    double maximo = 0;
     List<double> sortedKeys = lista.values.toList(growable:false);
     maximo = sortedKeys.reduce((a, b) => a + b);
     return maximo;
@@ -38,7 +42,30 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    AuthService().getinfo(widget.user.token).then((val2){
+    widget.user.username = val2.data['username'];                
+    widget.user.firstname = val2.data['firstname'];
+    widget.user.lastname = val2.data['lastname'];
+    widget.user.email = val2.data['email'];
+    widget.user.performance ={
+      "1": val2.data['performance']['1'].toDouble(),
+      "2": val2.data['performance']['2'].toDouble(),
+      "3": val2.data['performance']['3'].toDouble(),
+      "4": val2.data['performance']['4'].toDouble(),
+      "5": val2.data['performance']['5'].toDouble(),
+
+    };
+  
+    
+  }); 
     _tabController = TabController(vsync: this, length: 2);
+  }
+
+  _updateUser(User edituser){
+    setState(() {
+    widget.user.firstname = edituser.firstname;
+    widget.user.lastname = edituser.lastname;
+    });
   }
 
   @override
@@ -59,7 +86,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                         child: CircleAvatar(
                           radius: 95,
                           //backgroundColor: Colors.red,
-                          backgroundImage: AssetImage(widget.user.image),
+                          backgroundImage: AssetImage('assets/users/user_default.png'),
                         ),
                       ),
                     ),
@@ -81,7 +108,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        "${widget.user.correo}",
+                        "${widget.user.email}",
                         style: TextStyle(
                           fontSize: 12,
                         ),
@@ -93,7 +120,7 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                     child: Container(
                       alignment: Alignment.center,
                       child: Text(
-                        "Record: ${total(widget.user.performance)} puntos",
+                        "Puntos totales: ${total(widget.user.performance)} puntos",
                         style: TextStyle(
                           fontSize: 16,
                         ),
@@ -140,14 +167,16 @@ class _BodyState extends State<Body> with SingleTickerProviderStateMixin {
                             ExpansionTile(
                               title: Text("Cambiar nombre"),
                               children: <Widget> [
-                                EditData(),                           
+                                EditData(username: widget.user.username,
+                                  editUser: _updateUser
+                                ),                           
                               ]
                             ),
                             Divider(),
                             ExpansionTile(
                               title: Text("Cambiar contraseña"),
                               children: <Widget> [
-                                EditPassword(),                           
+                                EditPassword(username: widget.user.username),                           
                               ]
                             ),
                             ]
@@ -176,6 +205,13 @@ Model({this.firstname, this.lastname});
 
 
 class EditData extends StatefulWidget {
+  final String username;
+  final ValueChanged<User> editUser;
+  EditData({
+    Key key,
+    this.username,
+    this.editUser
+  }): super(key: key); 
   @override
   _EditDataState createState() => _EditDataState();
 }
@@ -218,19 +254,31 @@ class _EditDataState extends State<EditData> {
                   },
                 ),
                     
-                RaisedButton(
-                  color: Colors.green,
+                MaterialButton(
+                  splashColor: Colors.green,
+                  highlightColor: Colors.green,
+                  color: Colors.grey,
                   onPressed: () {
-                    
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
-                      /* Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Result(model: this.model),
-                              )
-                      );*/
-                      //cambiar nuevo nombre
+                     AuthService().changeName(widget.username, model.firstname, model.lastname).then((val){
+                        if(val.data['success']){
+                            Fluttertoast.showToast(
+                              msg: val.data['msg'],
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                              );
+                              User newdatauser = User();
+                              newdatauser.firstname = model.firstname;
+                              newdatauser.lastname = model.lastname;
+                              widget.editUser(newdatauser);
+                        }
+                     });
+                     
                     }
                     
                   },
@@ -256,6 +304,12 @@ class ModelPassword {
 }
 
 class EditPassword extends StatefulWidget {
+  final String username;
+  EditPassword({
+    Key key,
+    this.username,
+  }); 
+  
   @override
   _EditPasswordState createState() => _EditPasswordState();
 }
@@ -305,29 +359,38 @@ class _EditPasswordState extends State<EditPassword> {
             validator: (String value) {
               if (value.length < 7) {
                 return 'La contraseña debe tener más de 7 caracteres';
-              } else if (model.newpassword != null && value != model.repeatnewpassword){
-                print(value);
-                print(model.newpassword);
+              } else if (model.newpassword != null && value != model.newpassword){
+                
                 return "Las contraseñas no coinciden";
               }
               return null;
             },
             onSaved: (String value) {
-              //model.password = value;
+              model.repeatnewpassword = value;
             },
                       ),
                     
-                      RaisedButton(
-            color: Colors.green,
+            MaterialButton(
+            splashColor: Colors.green,
+            highlightColor: Colors.green,
+            color: Colors.grey,
             onPressed: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-               /* Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Result(model: this.model),
-                        )
-                );*/
+               AuthService().changePassword(widget.username, model.password, model.newpassword).then((val){
+                 if(val.data['success']){
+                  Fluttertoast.showToast(
+                    msg: val.data['msg'],
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.green,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                    );   
+
+                 }
+               });
               }
             },
             child: Text(
@@ -344,14 +407,18 @@ class _EditPasswordState extends State<EditPassword> {
   }
 }
 
-class Rendimiento extends StatelessWidget {
+class Rendimiento extends StatefulWidget {
   final User user;
   Rendimiento({
     Key key,
     this.user,
   }): super(key: key);
 
+  @override
+  _RendimientoState createState() => _RendimientoState();
+}
 
+class _RendimientoState extends State<Rendimiento> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -359,19 +426,25 @@ class Rendimiento extends StatelessWidget {
             height: 450,
             //Radar Chart
             child: RadarChart(
-              values: [user.performance[1], user.performance[2], 
-              user.performance[3], 
-              user.performance[4], user.performance[5]],
-              labels: [
-                "Matemática",
-                "Física",
-                "Química",
-                "Biología",
-                "Informática",
+
+              values: [
+              widget.user.performance["1"], widget.user.performance["2"], 
+              widget.user.performance["3"], 
+              widget.user.performance["4"], widget.user.performance["5"]
+              
               ],
-              maxValue: maximo(user.performance),
+              labels: [
+                categories[0].title,
+                categories[1].title,
+                categories[2].title,
+                categories[3].title,
+                categories[4].title,
+              ],
+              maxValue: maximo(widget.user.performance),
               fillColor: Colors.blue,
               chartRadiusFactor: 0.7,
+              
+  
             ),
     );
   }

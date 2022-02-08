@@ -1,5 +1,7 @@
 import 'package:application/models/user.dart';
+import 'package:application/services/authservice.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,34 +61,6 @@ class LoginWidget extends StatelessWidget{
   }
 }
 
-/*
-class Model {
-  String username;
-  String password;
-Model({this.username, this.password});
-}
-
-class Result extends StatelessWidget {
-  Model model;
-  Result({this.model});
-  @override
-  Widget build(BuildContext context) {
-    return (Scaffold(
-      appBar: AppBar(title: Text('Terminado')),
-      body: Container(
-        margin: EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(model.username, style: TextStyle(fontSize: 22)),
-            Text(model.password, style: TextStyle(fontSize: 22)),
-          ],
-        ),
-      ),
-    ));
-  }
-}
-*/
 class LoginForm extends StatefulWidget {
   @override
   _LoginFormState createState() => _LoginFormState();
@@ -95,6 +69,8 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   String _username, _password;
+  User user;
+  var token;
   final _formKey = GlobalKey<FormState>();
   //Model model = Model();
 @override
@@ -131,15 +107,59 @@ class _LoginFormState extends State<LoginForm> {
                     },
                   ),
                 
-                  RaisedButton(
-                    color: Colors.green,
-                    onPressed: SingIn,
+                  MaterialButton(
+                    color: Colors.grey,
+                    onPressed: (){
+                      final formState = _formKey.currentState;
+                      if (formState.validate()){
+                        formState.save();
+                        AuthService().login(_username, _password).then((val){
+                          if(val.data['success']){
+                            token = val.data['token'];
+                            Fluttertoast.showToast(
+                              msg: 'Bienvenido',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.green,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                              );   
+                            AuthService().getinfo(token).then((val2){
+                              user = User();
+                              print(val2.data['username']);
+                              user.username = val2.data['username'];                
+                              user.firstname = val2.data['firstname'];
+                              user.lastname = val2.data['lastname'];
+                              user.email = val2.data['email'];
+                              user.token = token;
+                              user.performance ={
+                                "1": val2.data['performance']['1'].toDouble(),
+                                "2": val2.data['performance']['2'].toDouble(),
+                                "3": val2.data['performance']['3'].toDouble(),
+                                "4": val2.data['performance']['4'].toDouble(),
+                                "5": val2.data['performance']['5'].toDouble(),
+
+                              };
+                           
+                              Navigator.pushAndRemoveUntil(context,
+                                                    MaterialPageRoute(builder: (context) => Home(user: user)), (route) => false);
+                            }); 
+                            
+                          }
+                        });
+                           
+                      }
+                    },
                     child: Text(
                       'Ir',
                       style: TextStyle(
                         color: Colors.white,
                       ),
                     ),
+                    splashColor: Colors.green,
+                    highlightColor: Colors.green,
+                    
                   )
           ],
         ),
@@ -147,22 +167,5 @@ class _LoginFormState extends State<LoginForm> {
       
   }
   
-
-  Future<void> SingIn() async{
-    final formState = _formKey.currentState;
-    if (formState.validate()){
-      formState.save();
-      
-      //await consult to database
-      if (_username == user.username && _password == user.password){
-        Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(builder: (context) => Home(user: user)), (route) => false);
-
-      }
-      
-    }
-
-
-  }
  
 }
